@@ -7,3 +7,19 @@
   padding: 0;
   font-family: Poppins;
 }
+.taskInput {
+  all: inherit;
+  border-bottom: 1px solid;
+  margin: 0.5rem 0;
+  width: 100%;
+}
+.task {
+  width: 30vw;
+  padding-left: 8px;
+}
+button {
+  background: none;
+  border: none;
+  padding: 0 4px;
+  color: #36b7fe;
+}

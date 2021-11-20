@@ -12,7 +12,13 @@ function TodoForm({ addTodos }) {
         reset();
       }}
     >
-      <input type="text" value={value} onChange={handleChange} />
+      <input
+        type="text"
+        placeholder="Enter your Task"
+        value={value}
+        onChange={handleChange}
+        className="taskInput"
+      />
     </form>
   );
 }

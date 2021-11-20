@@ -1,34 +1,61 @@
 import React from 'react';
+import useToggleState from './hooks/useToggleState';
+import EditTodoForm from './EditTodoForm';
 
-function TodoItem({ todos, updateTodos }) {
+function TodoItem({
+  id,
+  task,
+  isCompleted,
+  updateTodos,
+  toggleTodos,
+  editTodos,
+}) {
+  const [isToggle, setIsToggle] = useToggleState(false);
   return (
     <>
-      {todos.map((item) => {
-        return (
-          <div
-            key={item.id}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
+      {isToggle ? (
+        <EditTodoForm
+          task={task}
+          id={id}
+          editTodos={editTodos}
+          toggle={setIsToggle}
+        />
+      ) : (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <input
+            type="checkbox"
+            checked={isCompleted}
+            onChange={() => {
+              toggleTodos(id);
+            }}
+          />
+          <h4
+            className="task"
+            style={isCompleted ? { textDecoration: 'line-through' } : {}}
+          >
+            {task}
+          </h4>
+          <button
+            onClick={() => {
+              setIsToggle();
             }}
           >
-            <input type="checkbox" checked={item.isCompleted} />
-            <h4
-              style={item.isCompleted ? { textDecoration: 'line-through' } : {}}
-            >
-              {item.task}
-            </h4>
-            <button>Edit</button>
-            <button
-              onClick={() => {
-                updateTodos(item.id);
-              }}
-            >
-              Delete
-            </button>
-          </div>
-        );
-      })}
+            Edit
+          </button>
+          <button
+            onClick={() => {
+              updateTodos(id);
+            }}
+          >
+            Delete
+          </button>
+        </div>
+      )}
     </>
   );
 }

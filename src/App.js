@@ -4,9 +4,9 @@ import TodoApp from './TodoApp';
 
 function App() {
   return (
-    <>
+    <div style={{ display: 'grid', placeContent: 'center' }}>
       <TodoApp />
-    </>
+    </div>
   );
 }
 
