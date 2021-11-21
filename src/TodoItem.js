@@ -6,11 +6,15 @@ function TodoItem({
   id,
   task,
   isCompleted,
+  createdAt,
   updateTodos,
   toggleTodos,
   editTodos,
 }) {
   const [isToggle, setIsToggle] = useToggleState(false);
+  const taskInputEl = document.querySelector('.taskInput');
+  console.log(taskInputEl);
+
   return (
     <>
       {isToggle ? (
@@ -36,11 +40,21 @@ function TodoItem({
           />
           <h4
             className="task"
-            style={isCompleted ? { textDecoration: 'line-through' } : {}}
+            style={
+              isCompleted
+                ? { textDecoration: 'line-through', opacity: '0.5' }
+                : {}
+            }
           >
             {task}
           </h4>
+          <small
+            style={{ whiteSpace: 'nowrap', color: '#9e9e9e', paddingRight: 8 }}
+          >
+            {createdAt}
+          </small>
           <button
+            className="editTask"
             onClick={() => {
               setIsToggle();
             }}
@@ -48,11 +62,12 @@ function TodoItem({
             Edit
           </button>
           <button
+            className="deleteTask"
             onClick={() => {
               updateTodos(id);
             }}
           >
-            Delete
+            X
           </button>
         </div>
       )}

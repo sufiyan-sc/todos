@@ -1,14 +1,25 @@
 import React from 'react';
 import useInputState from './hooks/useInputState';
+import useToggleState from './hooks/useToggleState';
 
 function TodoForm({ addTodos }) {
   const [value, handleChange, reset] = useInputState('');
+  const [isEmpty, setIsEmpty] = useToggleState(false);
 
+  const addTask = () => {
+    addTodos(value);
+  };
+
+  const inputCheck = () => {
+    let taskInputEl = document.querySelector('.taskInput');
+    let taskInputValEl = taskInputEl.value;
+    taskInputValEl === '' ? setIsEmpty() : addTask();
+  };
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        addTodos(value);
+        inputCheck();
         reset();
       }}
     >
@@ -19,6 +30,9 @@ function TodoForm({ addTodos }) {
         onChange={handleChange}
         className="taskInput"
       />
+      {isEmpty ? (
+        <small className="warning">Please Enter input first</small>
+      ) : null}
     </form>
   );
 }

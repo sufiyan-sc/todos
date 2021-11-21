@@ -12,6 +12,7 @@ function TodoList({ todos, updateTodos, toggleTodos, editTodos }) {
               id={item.id}
               task={item.task}
               isCompleted={item.isCompleted}
+              createdAt={item.createdAt}
               updateTodos={updateTodos}
               toggleTodos={toggleTodos}
               editTodos={editTodos}
